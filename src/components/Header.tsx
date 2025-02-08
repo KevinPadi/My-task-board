@@ -20,19 +20,19 @@ const Header = () => {
                   <Moon strokeWidth={1.5} size={16} className='dark:block hidden text-white' />
                 </button> */}
 
-                <a
+                <Link 
+                  to={'/login'}
                   className="hidden sm:flex items-center justify-center py-1 px-3 size-fit rounded-md bg-transparent text-sm font-medium text-black transition-all ease-in-out hover:bg-neutral-200"
-                  href="#"
                 >
                   Log in
-                </a>
+                </Link>
 
-                <a
+                <Link
+                  to={'/signup'}
                   className="hidden sm:flex items-center justify-center py-1 px-3 size-fit rounded-md bg-black text-sm font-medium text-white transition"
-                  href="#"
                 >
                   Register
-                </a>
+                </Link>
               </div>
 
             </div>
