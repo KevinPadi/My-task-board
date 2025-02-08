@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom"
 import Logo from '../assets/Logo.svg'
+import { useState } from "react"
+import { Eye, EyeClosed } from "lucide-react"
+
 const LoginPage = () => {
+  const [isVisible, setIsVisible] = useState(false)
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-50">
       <Link to={'/'} className="flex items-center gap-2 text-neutral-900 mb-4">
@@ -12,7 +17,7 @@ const LoginPage = () => {
           Welcome Back
         </h1> 
         <p className='text-sm text-center text-balance text-neutral-500 mb-8'>
-          Enter your email below to login to your account
+          Enter your email and password below to login to your account
         </p>
 
         <form className="space-y-4">
@@ -35,14 +40,26 @@ const LoginPage = () => {
             <label htmlFor="password" className="block text-sm font-medium text-neutral-700">
               Password
             </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              className="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:outline-0 focus:outline-amber-500 focus:border-amber-500 border-neutral-300 transition-colors ease-in-out duration-300"
-            />
+            <div className="relative">
+              <input
+                type={isVisible ? "text" : "password"}
+                id="password"
+                name="password"
+                className="w-full mt-1 px-3 py-2 border rounded-lg shadow-sm focus:outline-0 focus:outline-amber-500 focus:border-amber-500 border-neutral-300 transition-colors ease-in-out duration-300"
+              />
+              <button type="button" onClick={() => setIsVisible(!isVisible)} className="absolute inset-y-0 end-1 top-2 size-fit p-1 rounded-lg hover:bg-neutral-100 hover:cursor-pointer text-neutral-500">
+                {
+                  isVisible 
+                  ? (
+                    <Eye strokeWidth={1.5} />
+                  )
+                  : (
+                    <EyeClosed strokeWidth={1.5} />
+                  )
+                }
+              </button>
+            </div>
           </div>
-
           {/* Submit */}
           <button
             type="submit"
