@@ -1,12 +1,14 @@
+import { Link } from 'react-router-dom'
 import Logo from '../assets/Logo.svg'
+
 const Header = () => {
   return (
     <header className="bg-transparent">
         <div className="mx-auto flex h-14 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
-          <a className="flex items-center gap-2 text-neutral-900" href="#">
+          <Link to={'/'} className="flex items-center gap-2 text-neutral-900">
             <img src={Logo} alt="" />
             <span className="font-medium">My Task Board</span>
-          </a>
+          </Link>
 
           <div className="flex flex-1 justify-end">
 

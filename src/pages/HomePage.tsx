@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom'
 import HeroIllustration from '../assets/hero_illustration.svg'
+
 const HomePage = () => {
   return (
     <section className='bg-neutral-50'>
@@ -15,9 +17,9 @@ const HomePage = () => {
               </p>
 
               <div className='mt-8'>
-                <a href="#" target="_blank" rel="noopener noreferrer" className='px-4 py-2 bg-amber-500 hover:bg-amber-400 transition-colors duration-300 ease-in-out rounded-lg text-white font-medium'>
+                <Link to={'/login'} className='px-4 py-2 bg-amber-500 hover:bg-amber-400 transition-colors duration-300 ease-in-out rounded-lg text-white font-medium'>
                   Get started
-                </a>
+                </Link>
               </div>
             </div>
           </div>
