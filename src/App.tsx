@@ -1,11 +1,14 @@
+import { BrowserRouter, Routes, Route } from "react-router";
+import HomePage from "./pages/HomePage";
+
 function App() {
 
   return (
-    <div>
-      <h1 className="text-blue-400">
-        My task board
-      </h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
