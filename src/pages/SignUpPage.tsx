@@ -9,7 +9,7 @@ const SignUpPage = () => {
   const [isVisible, setIsVisible] = useState(false)
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-50">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-neutral-50 p-4">
       <Link to={'/'} className="flex items-center gap-2 text-neutral-900 mb-4">
         <img src={Logo} alt="" />
         <span className="font-medium">My Task Board</span>
