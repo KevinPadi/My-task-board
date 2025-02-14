@@ -1,11 +1,18 @@
+import { BrowserRouter, Routes, Route } from "react-router";
+import HomePage from "./pages/HomePage";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage";
+
 function App() {
 
   return (
-    <div>
-      <h1 className="text-blue-400">
-        My task board
-      </h1>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
