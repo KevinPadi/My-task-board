@@ -1,8 +1,13 @@
 import { Link } from 'react-router-dom'
 import HeroIllustration from '../assets/hero_illustration.svg'
 import Header from '../components/Header'
+import { useAuth } from '../context/AuthContext'
+import { ArrowRight } from 'lucide-react'
 
 const HomePage = () => {
+
+  const { user } = useAuth()
+
   return (
     <section className='bg-neutral-50'>
       <Header />
@@ -19,8 +24,11 @@ const HomePage = () => {
               </p>
 
               <div className='mt-8'>
-                <Link to={'/login'} className='px-4 py-2 bg-amber-500 hover:bg-amber-400 transition-colors duration-300 ease-in-out rounded-lg text-white font-medium'>
-                  Get started
+                <Link to={user ? '/board' : '/login'} className='px-4 py-2 bg-amber-500 hover:bg-amber-400 transition-colors duration-300 ease-in-out rounded-lg text-white font-medium group flex w-fit items-center gap-2'>
+                  {
+                    user ? 'Go to board' : 'Get Started'
+                  }
+                  <ArrowRight className='size-4 group-hover:-rotate-45 transition-all ease-in-out duration-150' />
                 </Link>
               </div>
             </div>
