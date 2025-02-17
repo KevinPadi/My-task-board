@@ -19,9 +19,9 @@ function App() {
             <Route path="/b" element={<ProtectedRoute />} />
 
           {/* Ruta protegida */}
-          <Route element={<ProtectedRoute />}>
+          {/* <Route element={<ProtectedRoute />}> */}
             <Route path="/board" element={<BoardPage />} />
-          </Route>
+          {/* </Route> */}
         </Routes>
         <ToastContainer />
       </AuthProvider>
