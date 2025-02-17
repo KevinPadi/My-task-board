@@ -1,7 +1,12 @@
+import { useAuth } from "../context/AuthContext"
+
 const BoardPage = () => {
+  const { user } = useAuth()
   return (
     <h1>
-      Board Page
+      {
+        user ? user._id : 'cargando'
+      }
     </h1>
   )
 }
