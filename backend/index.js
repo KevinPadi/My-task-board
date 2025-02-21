@@ -6,6 +6,7 @@ import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import authRoutes from './routes/authRoutes.js'
 import protectedRoute from './routes/protectedRoute.js'
+import taskRoutes from './routes/taskRoutes.js'
 
 // Initialize dotenv
 dotenv.config()
@@ -36,6 +37,7 @@ connectDB()
 // Routes
 app.use('/api/auth', authRoutes) // rutas de autenticación
 app.use('/api', protectedRoute) // ruta protegida
+app.use('/api', taskRoutes) // rutas de las tasks
 
 
 // Example route
