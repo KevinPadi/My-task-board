@@ -16,12 +16,11 @@ export const getTasks = async (req, res) => {
 export const createTask = async (req, res) => {
   try {
     const userId = req.user;
-    console.log(req.user)
     const taskData = { 
       userId, 
       name: "New Task", 
       description: "", 
-      icon: "✅", 
+      icon: "🔥", 
       status: null 
     };
 
