@@ -4,12 +4,14 @@ import { Check, CircleCheckBig, CircleFadingArrowUp, CircleX, Loader, Trash2, X 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Drawer } from 'vaul'
-import { useTaskContext } from "../context/TaskContext";
+import { useTaskContext } from "../context/TaskContext"
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 function EditTaskDrawer({ task }: { task: TaskSchema }) {
   const [open, setOpen] = useState(false)
   const [isConfirming, setIsConfirming] = useState(false);
   const { updateTask, deleteTask } = useTaskContext()
+  const [parent] = useAutoAnimate()
 
   const {
     register,
@@ -58,6 +60,7 @@ function EditTaskDrawer({ task }: { task: TaskSchema }) {
     <Drawer.Root open={open} onOpenChange={setOpen} direction="right">
       <Drawer.Trigger>
       <li 
+        ref={parent}
         className={`w-full rounded-2xl p-4 text-xl hover:cursor-pointer transition-all ease-in-out duration-200 shadow-sm hover:shadow-lg
           ${task.status === 'inProgress' ? 'bg-yellow-300/75 hover:bg-yellow-300' :
             task.status === 'completed' ? 'bg-green-300/75 hover:bg-green-300' : 

@@ -8,10 +8,11 @@ const BoardPage = () => {
     <section>
       <Header />
       <div className="mt-20 max-w-2xl mx-auto p-4">
-        {/* aca va la lista */}
+
+        {/* task list */}
         <TasksList />
 
-        {/* Add task */}
+        {/* add new task button */}
         <AddTaskButton />
       </div>
     </section>
