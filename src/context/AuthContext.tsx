@@ -13,6 +13,7 @@ interface AuthContextType {
   login: (data: AuthData) => Promise<void>
   register: (data: AuthData) => Promise<void>
   logout: () => Promise<void>
+  deleteUser: () => Promise<void> // Agregado
 }
 
 interface AuthData {
@@ -72,18 +73,30 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       await axios.post(`${BACKEND_URL}/api/auth/logout`, {}, { withCredentials: true })
       setUser(null)
+      navigate('/')
     } catch (error: any) {
       toast.error("Error al cerrar sesión");
     }
   }
 
-  // Verifica si el usuario está autenticado al montar la app
+  const deleteUser = async () => {
+    try {
+      await axios.delete(`${BACKEND_URL}/api/auth/delete`, { withCredentials: true })
+      setUser(null)
+      toast.success("Cuenta eliminada exitosamente")
+      navigate('/register')
+    } catch (error: any) {
+      const errorMessage = error?.response?.data?.message || "Error al eliminar la cuenta"
+      toast.error(errorMessage)
+    }
+  }
+
   useEffect(() => {
     checkAuth()
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, deleteUser }}>
       {children}
     </AuthContext.Provider>
   )
