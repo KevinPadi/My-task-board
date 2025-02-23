@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
 import Logo from '../assets/Logo.svg'
 import { useAuth } from '../context/AuthContext'
+import Avatar from './Avatar'
 
 const Header = () => {
 
-  const { user, logout } = useAuth()
+  const { user } = useAuth()
 
   return (
     <header className="bg-transparent">
@@ -20,12 +21,7 @@ const Header = () => {
               <div className="sm:flex sm:gap-4 items-center">
                 {
                   user ? (
-                    <button 
-                    onClick={() => logout()}
-                    className="hidden sm:flex items-center justify-center py-1 px-3 size-fit rounded-md bg-transparent text-sm font-medium text-black transition-all ease-in-out hover:bg-neutral-200 hover:cursor-pointer"
-                    >
-                      Sign out
-                    </button>
+                    <Avatar />
                   ) : (
                     <>
                       <Link 
