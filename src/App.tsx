@@ -7,6 +7,7 @@ import { Flip, ToastContainer } from "react-toastify";
 import BoardPage from "./pages/BoardPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { TaskProvider } from "./context/TaskContext"
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
 
@@ -24,6 +25,9 @@ function App() {
             <Route element={<ProtectedRoute />}>
               <Route path="/board" element={<BoardPage />} />
             </Route>
+
+            {/* 404 */}
+            <Route path="*" element={<ErrorPage />} />
           </Routes>
           <ToastContainer 
             position="top-right"
