@@ -50,7 +50,7 @@ const Avatar: React.FC = () => {
               className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center rounded-md hover:cursor-pointer"
             >
               <LogOut className="w-4 h-4 mr-2" />
-              Cerrar sesión
+              Log out
             </button>
             <button
               onClick={handleDeleteClick}
@@ -70,12 +70,12 @@ const Avatar: React.FC = () => {
                   {isConfirmingDelete ? (
                     <>
                       <AlertTriangle className="w-4 h-4 mr-2 flex-shrink-0" />
-                      <span>¿Estás seguro?</span>
+                      <span>Are you sure?</span>
                     </>
                   ) : (
                     <>
                       <UserMinus className="w-4 h-4 mr-2 flex-shrink-0" />
-                      <span>Eliminar cuenta</span>
+                      <span>Delete Account</span>
                     </>
                   )}
                 </motion.div>
