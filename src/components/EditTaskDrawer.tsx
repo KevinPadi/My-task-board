@@ -1,15 +1,16 @@
 import { useState } from "react"
 import { taskSchema, TaskSchema } from "../schemas/taskSchema"
-import { Check, CircleCheckBig, CircleFadingArrowUp, CircleX, Loader, Trash2, X } from "lucide-react";
+import { Check, CircleCheckBig, CircleFadingArrowUp, CircleX, Loader, Trash2, X, AlertTriangle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Drawer } from 'vaul'
 import { useTaskContext } from "../context/TaskContext"
 import { useAutoAnimate } from '@formkit/auto-animate/react'
+import { AnimatePresence, motion } from 'framer-motion'
 
 function EditTaskDrawer({ task }: { task: TaskSchema }) {
   const [open, setOpen] = useState(false)
-  const [isConfirming, setIsConfirming] = useState(false);
+  const [isConfirming, setIsConfirming] = useState(false)
   const { updateTask, deleteTask } = useTaskContext()
   const [parent] = useAutoAnimate()
 
@@ -28,12 +29,11 @@ function EditTaskDrawer({ task }: { task: TaskSchema }) {
 
   const handleDeleteClick = () => {
     if (isConfirming) {
-      // Si el usuario ya confirmó, procedemos con la eliminación
       if (task._id) deleteTask(task._id)
       setOpen(false)
+      setIsConfirming(false)
     } else {
-      // Si no ha confirmado, cambiamos el texto del botón
-      setIsConfirming(true);
+      setIsConfirming(true)
     }
   }
 
@@ -57,7 +57,7 @@ function EditTaskDrawer({ task }: { task: TaskSchema }) {
   ]
 
   return (
-    <Drawer.Root open={open} onOpenChange={setOpen} direction="right">
+    <Drawer.Root open={open} onOpenChange={setOpen} onClose={() => setIsConfirming(false)} direction="right">
       <Drawer.Trigger>
       <li 
         ref={parent}
@@ -175,13 +175,32 @@ function EditTaskDrawer({ task }: { task: TaskSchema }) {
               {/* Buttons */}
               <div className="p-4 w-full sticky bottom-0 bg-zinc-50  mt-auto">
                 <div className="flex gap-6 justify-end">
-                  <button type="button" onClick={handleDeleteClick} className="rounded-full bg-neutral-200 hover:bg-neutral-300 px-4 py-1 hover:cursor-pointer transition-colors ease-in-out duration-200 flex items-center gap-2">
-                  {
-                    isConfirming ? 'Are you sure?' : 'Delete'
-                  }
+                  <motion.button layout='size' type="button" onClick={handleDeleteClick} className="rounded-full bg-neutral-200 hover:bg-neutral-300 px-4 hover:cursor-pointer transition-colors ease-in-out duration-200 border">
+                    <AnimatePresence mode="wait" initial={false}>
+                      <motion.div
+                        key={isConfirming ? 'confirm' : 'delete'}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y : 0 }}
+                        exit={{ opacity: 0, y : -10 }}
+                        transition={{ duration: 0.15 }}
+                        className="flex items-center border"
+                        layout
+                      >
+                        {isConfirming ? (
+                          <>
+                            <AlertTriangle className="w-4 h-4 mr-2 flex-shrink-0" />
+                            <span>Are you sure?</span>
+                          </>
+                        ) : (
+                          <>
+                            <Trash2 className="w-4 h-4 mr-2 flex-shrink-0" />
+                            <span>Delete Task</span>
+                          </>
+                        )}
 
-                    <Trash2 className="size-4" />
-                  </button>
+                      </motion.div>
+                    </AnimatePresence>
+                  </motion.button>
                   <button type="submit" className="rounded-full bg-blue-500 hover:bg-blue-600 hover:cursor-pointer transition-colors ease-in-out duration-200 text-white text-medium px-4 py-1 flex items-center gap-2">
                     {
                       isSubmitting ? (
