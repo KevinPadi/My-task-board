@@ -3,6 +3,7 @@ import HeroIllustration from '../assets/hero_illustration.svg'
 import Header from '../components/Header'
 import { useAuth } from '../context/AuthContext'
 import { ArrowRight } from 'lucide-react'
+import Footer from '../components/Footer'
 
 const HomePage = () => {
 
@@ -11,8 +12,8 @@ const HomePage = () => {
   return (
     <section className='bg-neutral-50'>
       <Header />
-      <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-20">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-center md:gap-8">
+      <div className="mx-auto max-w-screen-xl px-4 py-8 sm:px-20 space-y-20">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-center md:gap-8 mt-20">
           <div>
             <div className="max-w-lg md:max-w-none">
               <h1 className="text-4xl font-semibold text-neutral-900 sm:text-7xl text-balance">
@@ -42,7 +43,12 @@ const HomePage = () => {
             />
           </div>
         </div>
+
+        <div>
+          <img src="/src/assets/my_task_board_hero.webp" alt="hero image" className='rounded-xl shadow-2xl' />
+        </div>
       </div>
+      <Footer />
     </section>
   )
 }

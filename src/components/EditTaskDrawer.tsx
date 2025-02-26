@@ -175,7 +175,7 @@ function EditTaskDrawer({ task }: { task: TaskSchema }) {
               {/* Buttons */}
               <div className="p-4 w-full sticky bottom-0 bg-zinc-50  mt-auto">
                 <div className="flex gap-6 justify-end">
-                  <motion.button layout='size' type="button" onClick={handleDeleteClick} className="rounded-full bg-neutral-200 hover:bg-neutral-300 px-4 hover:cursor-pointer transition-colors ease-in-out duration-200 border">
+                  <motion.button layout='size' type="button" onClick={handleDeleteClick} className="rounded-full bg-neutral-200 hover:bg-neutral-300 px-4 hover:cursor-pointer transition-colors ease-in-out duration-200">
                     <AnimatePresence mode="wait" initial={false}>
                       <motion.div
                         key={isConfirming ? 'confirm' : 'delete'}
@@ -183,7 +183,7 @@ function EditTaskDrawer({ task }: { task: TaskSchema }) {
                         animate={{ opacity: 1, y : 0 }}
                         exit={{ opacity: 0, y : -10 }}
                         transition={{ duration: 0.15 }}
-                        className="flex items-center border"
+                        className="flex items-center"
                         layout
                       >
                         {isConfirming ? (
