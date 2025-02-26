@@ -2,11 +2,13 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { User, LogOut, UserMinus, AlertTriangle } from 'lucide-react'
 import { useAuth } from "../context/AuthContext"
+import { useTaskContext } from "../context/TaskContext"
 
 const Avatar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [isConfirmingDelete, setIsConfirmingDelete] = useState(false)
   const { logout, deleteUser } = useAuth()
+  const { clearTasks } = useTaskContext()
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
@@ -45,6 +47,7 @@ const Avatar: React.FC = () => {
             <button
               onClick={() => {
                 logout()
+                clearTasks()
                 setIsOpen(false)
               }}
               className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center rounded-md hover:cursor-pointer"
