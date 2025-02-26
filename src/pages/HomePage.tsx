@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom'
 import HeroIllustration from '../assets/hero_illustration.svg'
 import Header from '../components/Header'
 import { useAuth } from '../context/AuthContext'
-import { ArrowRight, ArrowUpRight, Github } from 'lucide-react'
-import Logo from '../assets/Logo.svg'
+import { ArrowRight } from 'lucide-react'
 import Footer from '../components/Footer'
 
 const HomePage = () => {
