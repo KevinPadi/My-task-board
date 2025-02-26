@@ -1,8 +1,16 @@
 import Header from "../components/Header"
 import TasksList from "../components/TasksList"
 import AddTaskButton from "../components/AddTaskButton"
+import { useEffect } from "react"
+import { useTaskContext } from "../context/TaskContext"
 
 const BoardPage = () => {
+
+  const { getTasks } = useTaskContext()
+
+  useEffect(() => {
+    getTasks()
+  }, [])
 
   return (
     <section>
