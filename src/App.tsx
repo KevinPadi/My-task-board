@@ -1,17 +1,48 @@
 import { BrowserRouter, Routes, Route } from "react-router";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
-import SignUpPage from "./pages/SignUpPage";
+import SignUpPage from "./pages/SignUpPage"
+import { AuthProvider } from "./context/AuthContext";
+import { Flip, ToastContainer } from "react-toastify";
+import BoardPage from "./pages/BoardPage";
+import ProtectedRoute from "./components/ProtectedRoute";
+import { TaskProvider } from "./context/TaskContext"
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-      </Routes>
+      <AuthProvider>
+        <TaskProvider>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+              <Route path="/b" element={<ProtectedRoute />} />
+
+            {/* Ruta protegida */}
+            <Route element={<ProtectedRoute />}>
+              <Route path="/board" element={<BoardPage />} />
+            </Route>
+
+            {/* 404 */}
+            <Route path="*" element={<ErrorPage />} />
+          </Routes>
+          <ToastContainer 
+            position="top-right"
+            autoClose={3000}
+            hideProgressBar={true}
+            newestOnTop={true}
+            closeOnClick={false}
+            rtl={false}
+            draggable
+            pauseOnHover
+            theme="colored"
+            transition={Flip}
+            />
+        </TaskProvider>
+      </AuthProvider>
     </BrowserRouter>
   )
 }

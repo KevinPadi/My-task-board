@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom'
 import Logo from '../assets/Logo.svg'
+import { useAuth } from '../context/AuthContext'
+import Avatar from './Avatar'
 
 const Header = () => {
+
+  const { user } = useAuth()
+
   return (
     <header className="bg-transparent">
         <div className="mx-auto flex h-14 max-w-screen-xl items-center gap-8 px-4 sm:px-6 lg:px-8">
@@ -14,25 +19,27 @@ const Header = () => {
 
             <div className="flex items-center justify-center">
               <div className="sm:flex sm:gap-4 items-center">
+                {
+                  user ? (
+                    <Avatar />
+                  ) : (
+                    <>
+                      <Link 
+                        to={'/login'}
+                        className="hidden sm:flex items-center justify-center py-1 px-3 size-fit rounded-md bg-transparent text-sm font-medium text-black transition-all ease-in-out hover:bg-neutral-200"
+                      >
+                        Log in
+                      </Link>
 
-                {/* <button className='bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 hover:dark:bg-neutral-700 p-2 rounded-md hover:cursor-pointer'>
-                  <Sun strokeWidth={1.5} size={16} className='block dark:hidden' />
-                  <Moon strokeWidth={1.5} size={16} className='dark:block hidden text-white' />
-                </button> */}
-
-                <Link 
-                  to={'/login'}
-                  className="hidden sm:flex items-center justify-center py-1 px-3 size-fit rounded-md bg-transparent text-sm font-medium text-black transition-all ease-in-out hover:bg-neutral-200"
-                >
-                  Log in
-                </Link>
-
-                <Link
-                  to={'/signup'}
-                  className="hidden sm:flex items-center justify-center py-1 px-3 size-fit rounded-md bg-black text-sm font-medium text-white transition"
-                >
-                  Register
-                </Link>
+                      <Link
+                        to={'/signup'}
+                        className="hidden sm:flex items-center justify-center py-1 px-3 size-fit rounded-md bg-black text-sm font-medium text-white transition"
+                      >
+                        Register
+                      </Link>
+                    </>
+                  )
+                }
               </div>
 
             </div>
