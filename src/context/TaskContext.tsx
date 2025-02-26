@@ -15,7 +15,8 @@ interface TaskContextType {
   getTasks: () => Promise<void>;
   createTask: () => Promise<void>;
   deleteTask: (taskId: string) => Promise<void>;
-  updateTask: (taskId: string, updatedData: Partial<Task>) => Promise<void>;
+  updateTask: (taskId: string, updatedData: Partial<Task>) => Promise<void>
+  clearTasks: () => void
 }
 
 const TaskContext = createContext<TaskContextType | undefined>(undefined);
@@ -86,12 +87,16 @@ export const TaskProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
+  const clearTasks = () => {
+    setTasks([]);
+  }
+
   useEffect(() => {
     getTasks();
   }, []);
 
   return (
-    <TaskContext.Provider value={{ tasks, getTasks, createTask, deleteTask, updateTask }}>
+    <TaskContext.Provider value={{ tasks, clearTasks, getTasks, createTask, deleteTask, updateTask }}>
       {children}
     </TaskContext.Provider>
   );
