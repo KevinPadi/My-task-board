@@ -11,7 +11,7 @@ const Footer = () => {
             <span className="font-medium">My Task Board</span>
           </div>
 
-          <p className='text-sm text-neutral-600 flex'>
+          <p className='text-sm text-neutral-600 flex sm:-translate-x-10'>
             build by 
             <a href='https://github.com/KevinPadi' target="_blank" rel="noopener noreferrer" className='underline hover:text-amber-700 pl-1 peer transition-all ease-in-out duration-200 '>
               Kevin Padilla

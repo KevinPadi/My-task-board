@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import HeroIllustration from '../assets/hero_illustration.svg'
+import HeroImage from '../assets/my_task_board_hero.webp'
 import Header from '../components/Header'
 import { useAuth } from '../context/AuthContext'
 import { ArrowRight } from 'lucide-react'
@@ -45,7 +46,7 @@ const HomePage = () => {
         </div>
 
         <div>
-          <img src="/src/assets/my_task_board_hero.webp" alt="hero image" className='rounded-xl shadow-2xl' />
+          <img src={HeroImage} alt="hero image" className='rounded-xl shadow-2xl' />
         </div>
       </div>
       <Footer />
