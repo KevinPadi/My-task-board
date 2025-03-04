@@ -11,9 +11,10 @@ interface AuthContextType {
   user: User | null
   loading: boolean
   login: (data: AuthData) => Promise<void>
+  loginAsGuest: () => Promise<void>
   register: (data: AuthData) => Promise<void>
   logout: () => Promise<void>
-  deleteUser: () => Promise<void> // Agregado
+  deleteUser: () => Promise<void>
 }
 
 interface AuthData {
@@ -58,6 +59,33 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }
 
+  const loginAsGuest = async () => {
+    const response = await fetch(`${BACKEND_URL}/api/auth/loginGuest`, { method: 'POST', credentials: 'include' })
+    const data = await response.json()
+
+    if (response.ok) {
+      setUser(data.user)
+      checkAuth()
+      toast.info('Log in as a guest. This account will be deleted in 1 hour.', {
+        autoClose: 5000,
+        pauseOnHover: true,
+        })
+      navigate('/board')
+
+      // delete cookie after 1 hour
+      setTimeout(async () => {
+        const res = await fetch(`${BACKEND_URL}/api/auth/logout`, { method: 'POST', credentials: 'include' })
+        setUser(null)
+        toast.error('Guest account expired. Please log in again.', {
+          autoClose: 5000,
+          pauseOnHover: true,
+          })
+        navigate('/')
+        console.log(res)
+      }, 60 * 60 * 1000)
+    }
+  }
+
   const register = async (data: AuthData) => {
     try {
       await axios.post(`${BACKEND_URL}/api/auth/register`, data, { withCredentials: true })
@@ -96,7 +124,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, deleteUser }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, deleteUser, loginAsGuest }}>
       {children}
     </AuthContext.Provider>
   )

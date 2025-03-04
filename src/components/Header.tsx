@@ -5,7 +5,7 @@ import Avatar from './Avatar'
 
 const Header = () => {
 
-  const { user } = useAuth()
+  const { user, loginAsGuest } = useAuth()
 
   return (
     <header className="bg-transparent">
@@ -18,7 +18,7 @@ const Header = () => {
           <div className="flex flex-1 justify-end">
 
             <div className="flex items-center justify-center">
-              <div className="sm:flex sm:gap-4 items-center">
+              <div className="sm:flex sm:gap-2 items-center">
                 {
                   user ? (
                     <Avatar />
@@ -31,12 +31,21 @@ const Header = () => {
                         Log in
                       </Link>
 
-                      <Link
+                      <div className='h-6 border border-neutral-300'></div>
+
+                      <Link 
                         to={'/signup'}
-                        className="hidden sm:flex items-center justify-center py-1 px-3 size-fit rounded-md bg-black text-sm font-medium text-white transition"
+                        className="hidden sm:flex items-center justify-center py-1 px-3 size-fit rounded-md bg-transparent text-sm font-medium text-black transition-all ease-in-out hover:bg-neutral-200"
                       >
                         Register
                       </Link>
+
+                      <button
+                        onClick={loginAsGuest}
+                        className="hidden sm:flex items-center justify-center py-1 px-3 size-fit rounded-md bg-black text-sm font-medium text-white transition hover:scale-105 hover:cursor-pointer"
+                      >
+                        Login as guest
+                      </button>
                     </>
                   )
                 }
