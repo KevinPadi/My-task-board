@@ -3,12 +3,12 @@ import HeroIllustration from '../assets/hero_illustration.svg'
 import HeroImage from '../assets/my_task_board_hero.webp'
 import Header from '../components/Header'
 import { useAuth } from '../context/AuthContext'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Rocket } from 'lucide-react'
 import Footer from '../components/Footer'
 
 const HomePage = () => {
 
-  const { user } = useAuth()
+  const { user, loginAsGuest } = useAuth()
 
   return (
     <section className='bg-neutral-50'>
@@ -25,13 +25,26 @@ const HomePage = () => {
                 Plan, prioritize, and complete your tasks effortlessly.
               </p>
 
-              <div className='mt-8'>
-                <Link to={user ? '/board' : '/login'} className='px-4 py-2 bg-amber-500 hover:bg-amber-400 transition-colors duration-300 ease-in-out rounded-lg text-white font-medium group flex w-fit items-center gap-2'>
+              <div className='mt-8 flex gap-4'>
+                <Link to={user ? '/board' : '/login'} className='px-4 py-2 bg-amber-100 hover:bg-amber-200 transition-colors duration-300 ease-in-out rounded-lg text-amber-700 font-medium group flex w-fit items-center gap-2'>
                   {
                     user ? 'Go to board' : 'Get Started'
                   }
                   <ArrowRight className='size-4 group-hover:-rotate-45 transition-all ease-in-out duration-150' />
                 </Link>
+
+                {
+                  !user ? (
+                    <button onClick={loginAsGuest} className='px-4 py-2 bg-amber-500 hover:bg-amber-400 transition-colors duration-300 ease-in-out rounded-lg text-white font-medium group flex w-fit items-center gap-2 hover:cursor-pointer'>
+                      {
+                        user ? 'Go to board' : 'Try as guest'
+                      }
+                      <Rocket className='size-4 group-hover:-rotate-45 transition-all ease-in-out duration-150' />
+                    </button>
+                  ) : (
+                    null
+                  )
+                }
               </div>
             </div>
           </div>

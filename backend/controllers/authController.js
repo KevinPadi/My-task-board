@@ -93,3 +93,39 @@ export const deleteUser = async (req, res) => {
     res.status(500).json({ message: 'Error al eliminar usuario', error: error.message })
   }
 }
+
+export const createGuestUser = async (req, res) => {
+  dotenv.config()
+
+  try {
+    const guestUser = {
+      email: `guest_${Date.now()}@gmail.com`,
+      password: 'guest_password',
+    }
+
+    const user = await User.create(guestUser)
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' })
+
+    // delete user after 1 hour
+    setTimeout(async () => {
+      try {
+        req.user = user._id
+        await deleteUser(req, res)
+      } catch (error) {
+        console.error(`Error deleting guest user ${user._id}:`, error)
+      }
+    }, 60 * 60 * 1000)
+
+    res.cookie('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'lax'
+    })
+
+    res.json({ message: 'Guest account created', user })
+  } catch (error) {
+    console.error('Error creating guest account:', error)
+    res.status(500).json({ message: 'Error creating guest account', error })
+  }
+}
